@@ -15,15 +15,14 @@ class User {
   name: string;
 
   @Column()
-  telephone: string;
-
-  @Column()
   email: string;
 
   @Column()
   password: string;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   avatar: string;
 
   @CreateDateColumn()

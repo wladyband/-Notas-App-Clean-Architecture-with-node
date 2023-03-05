@@ -1,11 +1,9 @@
 import { Request, Response } from 'express';
 import SendForgotPasswordEmailService from '../services/SendForgotPasswordEmailService';
 
-
 export default class ForgotPasswordController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { email } = request.body;
-   
 
     const sendForgotPasswordEmail = new SendForgotPasswordEmailService();
 
@@ -16,9 +14,7 @@ export default class ForgotPasswordController {
     const token = await sendForgotPasswordEmail.execute({
       email,
     });
-  
-    
-    
-    return response.json({token});
+
+    return response.json({ token });
   }
 }
