@@ -5,8 +5,18 @@ import isAuthenticated from '@shared/http/middlewares/isAuthenticated';
 
 const usersRouter = Router();
 const usersController = new UsersController();
-
+/**Remover posteriormente a lista de usuários */
 usersRouter.get('/', isAuthenticated, usersController.index);
+usersRouter.get(
+  '/:id',
+  isAuthenticated,
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  usersController.show,
+);
 
 usersRouter.post(
   '/',
