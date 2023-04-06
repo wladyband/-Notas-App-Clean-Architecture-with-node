@@ -5,17 +5,31 @@ import { celebrate, Joi, Segments } from 'celebrate';
 const productsRouter = Router();
 const productsController = new ProductsController();
 
-productsRouter.get('/', productsController.index);
+//productsRouter.get('/', productsController.index);
 
 productsRouter.get(
-  '/:id',
+  '/',
   celebrate({
-    [Segments.PARAMS]: {
-      id: Joi.string().uuid().required(),
+    [Segments.QUERY]: {
+      idProduct: Joi.string().uuid().required(),
     },
   }),
   productsController.show,
 );
+
+/*productsRouter.get(
+  '/:id'
+  celebrate({
+
+    [Segments.QUERY]: {
+      id: Joi.string().token().required(),
+    },
+  }),
+  (req, res) => {
+    res.status(200).send(req.query.id);
+  },
+  productsController.show,
+);*/
 
 productsRouter.post(
   '/',
