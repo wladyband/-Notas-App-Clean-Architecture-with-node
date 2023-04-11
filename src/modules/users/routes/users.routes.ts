@@ -12,11 +12,31 @@ usersRouter.get(
   isAuthenticated,
   celebrate({
     [Segments.QUERY]: {
-      idUser: Joi.string().uuid().required(),
+      id: Joi.string().uuid().required(),
     },
   }),
   usersController.show,
 );
+
+// usersRouter.get(
+//   '/',
+//   isAuthenticated,
+//   validateQueryParams,
+//   usersController.show,
+// );
+
+// // Middleware personalizado para validar os parâmetros de consulta
+// function validateQueryParams(req, res, next) {
+//   const { id } = req.query;
+
+//   if (!id || !/^[a-f\d]{8}-([a-f\d]{4}-){3}[a-f\d]{12}$/i.test(id)) {
+//     return res
+//       .status(400)
+//       .json({ message: 'O parâmetro "id" é inválido ou está ausente.' });
+//   }
+
+//   next();
+// }
 
 usersRouter.post(
   '/',
