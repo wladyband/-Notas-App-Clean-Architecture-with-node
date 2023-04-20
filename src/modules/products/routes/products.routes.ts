@@ -17,20 +17,6 @@ productsRouter.get(
   productsController.show,
 );
 
-/*productsRouter.get(
-  '/:id'
-  celebrate({
-
-    [Segments.QUERY]: {
-      id: Joi.string().token().required(),
-    },
-  }),
-  (req, res) => {
-    res.status(200).send(req.query.id);
-  },
-  productsController.show,
-);*/
-
 productsRouter.post(
   '/',
   celebrate({
