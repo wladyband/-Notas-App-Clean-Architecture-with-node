@@ -14,17 +14,28 @@ npm add -D tsconfig-path
 
 docker run --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=docker -p 5433:5432 -d postgres
 
-npm run typeorm migration:create -- -n CreateUsers
-npm run typeorm migration:create -- -n CreateUserTokens
-npm run typeorm migration:create -- -n CreateProducts
-npm run typeorm migration:create -- -n CreateOrders
-npm run typeorm migration:create -- -n AddUserIdToOrders
-npm run typeorm migration:create -- -n CreateOrdersProducts
-npm run typeorm migration:create -- -n AddOrdersIdToOrdersProducts
-npm run typeorm migration:create -- -n AddProductIdToOrdersProducts
+## Comandos necessários para TypeORM
+<ul>
+  <li>npm run typeorm migration:create -- -n CreateUsers
+</li>
+  <li>npm run typeorm migration:create -- -n CreateUserTokens
+</li>
+  <li>npm run typeorm migration:create -- -n CreateProducts
+</li>
+  <li>npm run typeorm migration:create -- -n CreateOrders
+</li>
+  <li>npm run typeorm migration:create -- -n AddUserIdToOrders
+</li>
+  <li>npm run typeorm migration:create -- -n CreateOrdersProducts
+</li>
 
-
-npm run typeorm migration:run
+<li>npm run typeorm migration:create -- -n AddOrdersIdToOrdersProduct
+</li>
+  <li>npm run typeorm migration:create -- -n AddProductIdToOrdersProducts
+</li>
+  <li>npm run typeorm migration:run
+</li>
+</ul>
 
 
 ## Comandos necessários para docker
@@ -44,20 +55,32 @@ npm run typeorm migration:run
 </li>
 <li>docker image -a
 </li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-
-
+<li>docker images -a
+</li>
+<li>docker image rmi 680aba37fd0f
+</li>
+<li>docker image rmi 739b655ecf34
+</li>
+<li>docker images -a
+</li>
+<li>docker image rmi 680aba37fd0f
+</li>
+<li>docker rm 739b655ecf34
+</li>
+<li>docker images -a
+</li>
+<li>docker ps -a
+</li>
+<li>docker image rmi 680aba37fd0f
+</li>
+<li>docker images -a
+</li>
+<li>docker volume ls
+</li>
+<li>docker volume rm 8003dd19b67d11922d5b1ad8b6394f2ddbf73e1b715b4776ad44c531048822fe
+</li>
+<li>docker volume ls
+</li>
 </ul>
 
 
@@ -65,18 +88,18 @@ npm run typeorm migration:run
 
 
 
-docker images -a
-docker image rmi 680aba37fd0f
-docker image rmi 739b655ecf34
-docker images -a
-docker image rmi 680aba37fd0f
-docker rm 739b655ecf34
-docker images -a
-docker ps -a
-docker image rmi 680aba37fd0f
-docker images -a
-docker volume ls
-docker volume rm 8003dd19b67d11922d5b1ad8b6394f2ddbf73e1b715b4776ad44c531048822fe
-docker volume ls
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
