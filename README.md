@@ -29,13 +29,42 @@ npm run typeorm migration:run
 
 ## Comandos necessários para docker
 
-Exemplos:
-docker stop 739b655ecf34
-docker start 739b655ecf34
-npm run dev
-docker ps
-docker ps -l
-docker image -a
+
+<h1>Exemplos:</h1>
+<ul>
+  <li>docker stop 739b655ecf34
+</li>
+  <li>docker start 739b655ecf34
+</li>
+  <li>npm run dev
+</li>
+  <li>docker ps
+</li>
+<li>docker ps -l
+</li>
+<li>docker image -a
+</li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+
+
+</ul>
+
+
+
+
+
+
 docker images -a
 docker image rmi 680aba37fd0f
 docker image rmi 739b655ecf34
