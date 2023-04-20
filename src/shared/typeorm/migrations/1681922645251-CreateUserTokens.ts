@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateOrdersProducts1678105899923 implements MigrationInterface {
+export class CreateUserTokens1681922645251 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'orders_products',
+        name: 'user_tokens',
         columns: [
           {
             name: 'id',
@@ -14,14 +14,14 @@ export class CreateOrdersProducts1678105899923 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'price',
-            type: 'decimal',
-            precision: 10,
-            scale: 2,
+            name: 'token',
+            type: 'uuid',
+            generationStrategy: 'uuid',
+            default: 'uuid_generate_v4()',
           },
           {
-            name: 'quantity',
-            type: 'int',
+            name: 'user_id',
+            type: 'uuid',
           },
           {
             name: 'created_at',
@@ -34,11 +34,21 @@ export class CreateOrdersProducts1678105899923 implements MigrationInterface {
             default: 'now()',
           },
         ],
+        foreignKeys: [
+          {
+            name: 'TokenUser',
+            referencedTableName: 'users',
+            referencedColumnNames: ['id'],
+            columnNames: ['user_id'],
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE',
+          },
+        ],
       }),
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('orders_products');
+    await queryRunner.dropTable('user_tokens');
   }
 }

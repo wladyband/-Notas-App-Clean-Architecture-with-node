@@ -33,6 +33,18 @@ class OrdersRepository extends Repository<Order> {
 
     return order;
   }
+
+  public async findByUser(userId: string): Promise<any[]> {
+    const query = `
+    SELECT op.title, SUM(op.price) AS total_price, op.created_at
+    FROM public.orders o
+    JOIN public.orders_products op ON o.id = op.order_id
+    WHERE o.user_id = $1
+    GROUP BY op.title, op.created_at;
+  `;
+    const result = await this.query(query, [userId]);
+    return result;
+  }
 }
 
 export default OrdersRepository;

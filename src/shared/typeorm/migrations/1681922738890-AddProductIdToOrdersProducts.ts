@@ -5,7 +5,7 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export class AddProductIdToOrdersProducts1678106505149
+export class AddProductIdToOrdersProducts1681922738890
   implements MigrationInterface
 {
   public async up(queryRunner: QueryRunner): Promise<void> {

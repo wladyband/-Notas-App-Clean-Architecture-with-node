@@ -13,10 +13,15 @@ interface IProduct {
 interface IRequest {
   user_id: string;
   products: IProduct[];
+  title_list_products?: string; // Novo campo
 }
 
 class CreateOrderService {
-  public async execute({ user_id, products }: IRequest): Promise<Order> {
+  public async execute({
+    user_id,
+    products,
+    title_list_products,
+  }: IRequest): Promise<Order> {
     const ordersRepository = getCustomRepository(OrdersRepository);
     const customersRepository = getCustomRepository(UsersRepository);
     const productsRepository = getCustomRepository(ProductRepository);
@@ -27,7 +32,14 @@ class CreateOrderService {
       throw new AppError('Could not find any user with the given id.');
     }
 
+    const userOrders = await ordersRepository.findByUser(user_id);
     const existsProducts = await productsRepository.findAllByIds(products);
+
+    if (!userOrders.length) {
+      throw new AppError(
+        'Could not find any orders products with the given ids.',
+      );
+    }
 
     if (!existsProducts.length) {
       throw new AppError('Could not find any products with the given ids.');
@@ -59,9 +71,11 @@ class CreateOrderService {
     }
 
     const serializedProducts = products.map(product => ({
+      //list_title = request.titulo_lista_produtos;
       product_id: product.id,
       quantity: product.quantity,
       price: existsProducts.filter(p => p.id === product.id)[0].price,
+      title: title_list_products,
     }));
 
     const order = await ordersRepository.createOrder({
