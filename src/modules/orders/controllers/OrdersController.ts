@@ -29,7 +29,10 @@ export default class OrdersController {
     return response.json(order);
   }
 
-  async index(request: Request, response: Response): Promise<Response> {
+  async showListOrdersProducts(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
     const { id } = request.params;
 
     const ordersRepository = getCustomRepository(OrdersRepository);

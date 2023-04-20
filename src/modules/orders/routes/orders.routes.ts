@@ -37,7 +37,7 @@ ordersRouter.get(
       id: Joi.string().uuid().required(),
     },
   }),
-  ordersController.index,
+  ordersController.showListOrdersProducts,
 );
 
 export default ordersRouter;
