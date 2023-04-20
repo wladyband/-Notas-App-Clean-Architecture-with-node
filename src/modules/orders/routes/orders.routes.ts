@@ -33,7 +33,7 @@ ordersRouter.post(
 ordersRouter.get(
   '/user/:id',
   celebrate({
-    [Segments.PARAMS]: {
+    [Segments.QUERY]: {
       id: Joi.string().uuid().required(),
     },
   }),
