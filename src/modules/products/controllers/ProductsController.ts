@@ -4,6 +4,7 @@ import DeleteProductService from '../services/DeleteProductService';
 import ListProductService from '../services/ListProductService';
 import ShowProductService from '../services/ShowProductService';
 import UpdateProductService from '../services/UpdateProductService';
+import ListProductsByUserService from '../services/ListProductsByUserService';
 
 export default class ProductsController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -24,8 +25,21 @@ export default class ProductsController {
     return response.json(product);
   }
 
+  public async showProductUserId(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const { user_id } = request.params;
+
+    const listProductsByUser = new ListProductsByUserService();
+
+    const listProduct = await listProductsByUser.execute({ user_id });
+
+    return response.json(listProduct);
+  }
+
   public async create(request: Request, response: Response): Promise<Response> {
-    const { name, price, quantity } = request.body;
+    const { name, price, quantity, user_id } = request.body;
 
     const createProduct = new CreateProductService();
 
@@ -33,6 +47,7 @@ export default class ProductsController {
       name,
       price,
       quantity,
+      user_id,
     });
 
     return response.json(product);

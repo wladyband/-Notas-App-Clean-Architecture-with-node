@@ -32,14 +32,7 @@ class CreateOrderService {
       throw new AppError('Could not find any user with the given id.');
     }
 
-    const userOrders = await ordersRepository.findByUser(user_id);
     const existsProducts = await productsRepository.findAllByIds(products);
-
-    if (!userOrders.length) {
-      throw new AppError(
-        'Could not find any orders products with the given ids.',
-      );
-    }
 
     if (!existsProducts.length) {
       throw new AppError('Could not find any products with the given ids.');

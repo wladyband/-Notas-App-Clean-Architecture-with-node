@@ -8,7 +8,7 @@ const ordersController = new OrdersController();
 
 ordersRouter.use(isAuthenticated);
 
-ordersRouter.get(
+/*ordersRouter.get(
   '/:id',
   celebrate({
     [Segments.PARAMS]: {
@@ -29,9 +29,10 @@ ordersRouter.post(
   }),
   ordersController.create,
 );
-
+*/
 ordersRouter.get(
-  '/user/:id',
+  '/user',
+  isAuthenticated,
   celebrate({
     [Segments.QUERY]: {
       id: Joi.string().uuid().required(),

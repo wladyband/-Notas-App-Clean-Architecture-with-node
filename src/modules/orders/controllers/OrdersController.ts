@@ -3,6 +3,7 @@ import CreateOrderService from '../services/CreateOrderService';
 import ShowOrderService from '../services/ShowOrderService';
 import { getCustomRepository } from 'typeorm';
 import OrdersRepository from '../typeorm/repositories/OrdersRepository';
+import ShowListOrdersProductsService from '../services/ShowListOrdersProductsService';
 
 export default class OrdersController {
   public async show(request: Request, response: Response): Promise<Response> {
@@ -29,16 +30,22 @@ export default class OrdersController {
     return response.json(order);
   }
 
-  async showListOrdersProducts(
-    request: Request,
-    response: Response,
+  public async showListOrdersProducts(
+    req: Request,
+    res: Response,
   ): Promise<Response> {
-    const { id } = request.params;
+    const { id } = req.query;
 
-    const ordersRepository = getCustomRepository(OrdersRepository);
+    if (!id) {
+      return res.status(400).json({ error: 'Missing user id' });
+    }
 
-    const orders = await ordersRepository.findByUser(id);
+    const showListOrdersProducts = new ShowListOrdersProductsService();
 
-    return response.json(orders);
+    const orders = await showListOrdersProducts.execute({
+      id: String(id),
+    });
+
+    return res.json(orders);
   }
 }

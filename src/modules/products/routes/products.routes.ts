@@ -25,9 +25,25 @@ productsRouter.post(
       name: Joi.string().required(),
       price: Joi.number().precision(2).required(),
       quantity: Joi.number().required(),
+      user_id: Joi.string().required(),
     },
   }),
   productsController.create,
+);
+
+productsRouter.post(
+  '/:id',
+  celebrate({
+    [Segments.BODY]: {
+      name: Joi.string().required(),
+      price: Joi.number().precision(2).required(),
+      quantity: Joi.number().required(),
+    },
+    [Segments.QUERY]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  productsController.showProductUserId,
 );
 
 productsRouter.put(

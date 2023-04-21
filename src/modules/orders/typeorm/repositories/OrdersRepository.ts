@@ -1,6 +1,7 @@
 import User from '@modules/users/typeorm/entities/User';
-import { EntityRepository, Repository } from 'typeorm';
+import { EntityRepository, Repository, getRepository } from 'typeorm';
 import Order from '../entities/Order';
+import OrdersProducts from '../entities/OrdersProducts';
 
 interface IProduct {
   product_id: string;
@@ -34,7 +35,7 @@ class OrdersRepository extends Repository<Order> {
     return order;
   }
 
-  public async findByUser(userId: string): Promise<any[]> {
+  /* public async findByUser(userId: string): Promise<any[]> {
     const query = `
     SELECT op.title, SUM(op.price) AS total_price, op.created_at
     FROM public.orders o
@@ -43,6 +44,18 @@ class OrdersRepository extends Repository<Order> {
     GROUP BY op.title, op.created_at;
   `;
     const result = await this.query(query, [userId]);
+    return result;
+  }*/
+  public async findByUser(userId: string): Promise<any[]> {
+    console.log('userId:', userId);
+    const result = await getRepository(OrdersProducts)
+      .createQueryBuilder('op')
+      .select(['op.title', 'SUM(op.price) as total_price', 'op.created_at'])
+      .innerJoin('op.order', 'o')
+      .where('o.user_id = :userId', { userId })
+      .groupBy('op.title, op.created_at')
+      .getRawMany();
+
     return result;
   }
 }

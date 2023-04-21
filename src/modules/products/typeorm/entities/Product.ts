@@ -1,8 +1,11 @@
 import OrdersProducts from '@modules/orders/typeorm/entities/OrdersProducts';
+import User from '@modules/users/typeorm/entities/User';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -24,6 +27,10 @@ class Product {
 
   @Column('int')
   quantity: number;
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 
   @CreateDateColumn()
   created_at: Date;
