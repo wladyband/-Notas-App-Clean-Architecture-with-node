@@ -71,4 +71,15 @@ productsRouter.delete(
   productsController.delete,
 );
 
+productsRouter.get(
+  '/',
+  isAuthenticated,
+  celebrate({
+    [Segments.QUERY]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  productsController.showProductUserId,
+);
+
 export default productsRouter;

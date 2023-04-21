@@ -29,7 +29,8 @@ export default class ProductsController {
     request: Request,
     response: Response,
   ): Promise<Response> {
-    const { user_id } = request.params;
+    const user_id =
+      typeof request.query.user_id === 'string' ? request.query.user_id : '';
 
     const listProductsByUser = new ListProductsByUserService();
 
