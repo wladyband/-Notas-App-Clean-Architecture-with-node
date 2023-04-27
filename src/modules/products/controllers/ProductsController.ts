@@ -25,20 +25,6 @@ export default class ProductsController {
     return response.json(product);
   }
 
-  public async showProductUserId(
-    request: Request,
-    response: Response,
-  ): Promise<Response> {
-    const user_id =
-      typeof request.query.user_id === 'string' ? request.query.user_id : '';
-
-    const listProductsByUser = new ListProductsByUserService();
-
-    const listProduct = await listProductsByUser.execute({ user_id });
-
-    return response.json(listProduct);
-  }
-
   public async create(request: Request, response: Response): Promise<Response> {
     const { name, price, quantity, user_id } = request.body;
 
@@ -68,6 +54,20 @@ export default class ProductsController {
     });
 
     return response.json(product);
+  }
+
+  public async showProductUserId(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const user_id =
+      typeof request.query.user_id === 'string' ? request.query.user_id : '';
+
+    const listProductsByUser = new ListProductsByUserService();
+
+    const listProduct = await listProductsByUser.execute({ user_id });
+
+    return response.json(listProduct);
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {

@@ -53,25 +53,13 @@ docker run --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=docker
 </li>
 <li>docker ps -l
 </li>
-<li>docker image -a
-</li>
 <li>docker images -a
 </li>
-<li>docker image rmi 680aba37fd0f
+<li>docker image rmi -f 680aba37fd0f
 </li>
-<li>docker image rmi 739b655ecf34
-</li>
-<li>docker images -a
-</li>
-<li>docker image rmi 680aba37fd0f
-</li>
-<li>docker rm 739b655ecf34
-</li>
-<li>docker images -a
 </li>
 <li>docker ps -a
-</li>
-<li>docker image rmi 680aba37fd0f
+<li>docker rm 739b655ecf34
 </li>
 <li>docker images -a
 </li>
