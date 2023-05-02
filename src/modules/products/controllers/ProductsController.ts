@@ -16,11 +16,11 @@ export default class ProductsController {
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
-    const { id } = request.params;
+    const idProduct = String(request.query.idProduct);
 
     const showProduct = new ShowProductService();
 
-    const product = await showProduct.execute({ id });
+    const product = await showProduct.execute({ id: idProduct });
 
     return response.json(product);
   }
@@ -60,12 +60,11 @@ export default class ProductsController {
     request: Request,
     response: Response,
   ): Promise<Response> {
-    const user_id =
-      typeof request.query.user_id === 'string' ? request.query.user_id : '';
+    const id = typeof request.query.id === 'string' ? request.query.id : '';
 
     const listProductsByUser = new ListProductsByUserService();
 
-    const listProduct = await listProductsByUser.execute({ user_id });
+    const listProduct = await listProductsByUser.execute({ user_id: id });
 
     return response.json(listProduct);
   }
